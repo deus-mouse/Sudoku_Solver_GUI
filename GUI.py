@@ -86,7 +86,7 @@ class Grid:
                 self.update_model()
                 return False
 
-    def sketch(self, val):
+    def sketch(self, val): # устанавливает временное значение для объекта выбранного куба
         row, col = self.selected
         self.cubes[row][col].set_temp(val)
 
@@ -193,15 +193,15 @@ class Cube:
     cols = 9
 
     def __init__(self, value, row, col, width, height):
-        self.value = value
-        self.temp = 0
+        self.value = value # фактическое значение
+        self.temp = 0 # временное значение
         self.row = row
         self.col = col
         self.width = width
         self.height = height
         self.selected = False
 
-    def draw(self, win):
+    def draw(self, win): # рисует таблицу, выделяет красным выбранный слот
         fnt = pygame.font.SysFont("comicsans", 40)
 
         gap = self.width / 9
@@ -215,7 +215,7 @@ class Cube:
             text = fnt.render(str(self.value), 1, (0, 0, 0))
             win.blit(text, (x + (gap/2 - text.get_width()/2), y + (gap/2 - text.get_height()/2)))
 
-        if self.selected:
+        if self.selected: # выделяет если выбран
             pygame.draw.rect(win, (255,0,0), (x,y, gap ,gap), 3)
 
     def draw_change(self, win, g=True):
